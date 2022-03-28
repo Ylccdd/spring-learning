@@ -2,8 +2,8 @@ package space.yl.spring.common.dao.impl;
 
 import space.yl.spring.common.dao.TestDao;
 
-/**测试接口实现类
- * @author yaojianfeng
+/**无参构造实现对象
+ * @author
  */
 public class TestDaoImpl implements TestDao {
     @Override

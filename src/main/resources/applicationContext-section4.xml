@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--静态资源的支持-->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
@@ -16,11 +17,15 @@
     <!--声明使用注解配置-->
     <cotext:annotation-config/>
     <!--声明Spring工厂注解的扫描范围-->
-    <cotext:component-scan base-package="shop.yaojianfeng.springlearning"/>
+    <cotext:component-scan base-package="space.yl.spring"/>
     <!--基于注解配置的aop代理-->
     <aop:aspectj-autoproxy/>
     <!--基于注解驱动的MVC-->
     <mvc:annotation-driven/>
-
-
+    <!--    静态资源放行-->
+    <mvc:resources mapping="/css/**" location="/css/" />
+    <mvc:resources mapping="/page/**" location="/page/" />
+    <mvc:resources mapping="/js/**" location="/js/" />
+    <mvc:resources mapping="/font/**" location="/font/" />
+    <mvc:resources mapping="/img/**" location="/img/" />
 </beans>

@@ -7,7 +7,7 @@
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-        <!--加载配置文件-->
+        <!--加载配置文件 项目启动的配置文件指定为section4-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath:applicationContext-section4.xml</param-value>
@@ -16,7 +16,10 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
+
         <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <!-- /*:  把所有请求拦截去匹配控制器
+              /:  会放行.jsp,但仍会拦截其他请求,如css js等-->
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 </web-app>

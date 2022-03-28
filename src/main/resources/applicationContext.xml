@@ -5,12 +5,17 @@
         default-init-method="init" >
 
     <!--配置实例
+    无参构造
         id唯一
+        class全限定类名
         默认无参构造创建对象
         scope singleton 存在一个对象 加载配置文件时创建对象
              /prototype 存在多个对象 getbean时创建对象
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~```
+
     -->
     <bean id="testDao" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>
+    <bean id="testFactory" class="space.yl.spring.common.factory.StaticFactory" factory-method="getTestDao"></bean>
     <bean id="testDao01" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>
     <bean id="testDao02" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>
     <bean id="testDao03" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>

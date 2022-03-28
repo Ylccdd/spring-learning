@@ -8,6 +8,7 @@ public class UserDaoDemo {
     //psvm
     public static void main(String[] args) {
         ApplicationContext app = new ClassPathXmlApplicationContext("applicationContext.xml");
+        //无参构造实现对象
         TestDao testDao = (TestDao) app.getBean("testDao");
         testDao.test();
     }
