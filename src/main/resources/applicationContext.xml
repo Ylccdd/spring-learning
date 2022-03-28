@@ -4,12 +4,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
         default-init-method="init" >
 
-    <!--配置实例-->
-    <bean id="testDao"  class="shop.yaojianfeng.springlearning.common.dao.impl.TestDaoImpl" scope="prototype"/>
-    <bean id="testDao01"  class="shop.yaojianfeng.springlearning.common.dao.impl.TestDaoImpl" scope="prototype"/>
-    <bean id="testDao02"  class="shop.yaojianfeng.springlearning.common.dao.impl.TestDaoImpl" scope="prototype"/>
-    <bean id="testDao03"  class="shop.yaojianfeng.springlearning.common.dao.impl.TestDaoImpl" scope="prototype"/>
-    <bean id="student1"  class="shop.yaojianfeng.springlearning.section2.entity.Student"  init-method="init" scope="prototype"/>
-    <bean id="appUtil"  class="shop.yaojianfeng.springlearning.section2.util.AppUtil"/>
+    <!--配置实例
+        id唯一
+        默认无参构造创建对象
+        scope singleton 存在一个对象 加载配置文件时创建对象
+             /prototype 存在多个对象 getbean时创建对象
+    -->
+    <bean id="testDao" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>
+    <bean id="testDao01" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>
+    <bean id="testDao02" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>
+    <bean id="testDao03" class="space.yl.spring.common.dao.impl.TestDaoImpl" scope="prototype"/>
+    <bean id="student1" class="space.yl.spring.section2.entity.Student" init-method="init" scope="prototype"/>
+    <bean id="appUtil"  class="space.yl.spring.section2.util.AppUtil"/>
 
 </beans>

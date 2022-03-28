@@ -26,7 +26,19 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring 应用程序上下文" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-section2.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-section3.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext-section4.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Spring 应用程序上下文 (2)" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/space/yl/spring/section2/entity/ConfigB.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/space/yl/spring/section2/entity/ConfigJ.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/space/yl/spring/section2/entity/HelloWorldConfig.java</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="javaeeApplication" name="javaEEApplication">
       <configuration>
