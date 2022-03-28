@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd"
+       default-init-method="init"
+>
+
+    <!--配置实例-->
+    <bean id="customer01" init-method="postConstructTest"
+          class="shop.yaojianfeng.springlearning.section2.entity.Customer"
+          scope="prototype"/>
+    <bean id="customer02" class="shop.yaojianfeng.springlearning.section2.entity.Customer" scope="prototype"/>
+    <!--注入简单值-->
+    <bean id="customer03" class="shop.yaojianfeng.springlearning.section2.entity.Customer" scope="prototype">
+        <property name="cname">
+            <value>doushuai</value>
+        </property>
+        <property name="cid">
+            <value>123456</value>
+        </property>
+    </bean>
+    <bean id="customer04" class="shop.yaojianfeng.springlearning.section2.entity.Customer" scope="prototype">
+        <property name="cname" value="xiangyu"/>
+        <property name="cid" value="456789"/>
+    </bean>
+    <bean id="testDao" class="shop.yaojianfeng.springlearning.common.dao.impl.TestDaoImpl" scope="prototype"/>
+
+    <!--注入另一个对象-->
+    <bean id="student01" class="shop.yaojianfeng.springlearning.section2.entity.Student" scope="prototype">
+        <property name="address" ref="address01"/>
+        <property name="name" value="slkdjfkl"/>
+    </bean>
+    <bean id="address01" class="shop.yaojianfeng.springlearning.section2.entity.Address" scope="prototype">
+        <property name="country" value="China"/>
+        <property name="province" value="henan"/>
+        <property name="cityName" value="zhengzhou"/>
+    </bean>
+
+    <!--注入集合-->
+    <bean id="question01" class="shop.yaojianfeng.springlearning.section2.entity.Question" scope="prototype">
+        <property name="qname" value="What is Java?"/>
+        <property name="qid" value="1"/>
+        <property name="answers">
+            <!--使用list 注入简单字符串-->
+            <list>
+                <value>Java is a programming language</value>
+                <value>Java is a platform</value>
+                <value>Java is a platform</value>
+                <value>Java is a platform</value>
+                <value>123456</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="question02" class="shop.yaojianfeng.springlearning.section2.entity.Question" scope="prototype">
+        <property name="qname" value="What is Java?"/>
+        <property name="qid" value="2"/>
+        <property name="answers">
+            <!--使用list 注入引用对象 可以重复  set不可重复-->
+            <list>
+                <ref bean="address01"/>
+                <ref bean="student01"/>
+                <!--                <ref bean="student01"/>-->
+                <ref bean="answer01"/>
+                <value>456</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--答案类-->
+    <bean id="answer01" class="shop.yaojianfeng.springlearning.section2.entity.Answer">
+        <property name="aid" value="1"/>
+        <property name="aname" value="I am answer01"/>
+    </bean>
+    <!--使用setter注入Map-->
+    <bean id="question03" class="shop.yaojianfeng.springlearning.section2.entity.Question" scope="prototype">
+        <property name="qname" value="who are you?"/>
+        <property name="qid" value="3"/>
+        <property name="answers">
+            <!-- spring 4.0以后 可以支持泛型的依赖注入 -->
+            <map>
+                <entry key="name" value="Jeff"/>
+                <entry key="address" value-ref="address01"/>
+                <entry key="student" value-ref="student01"/>
+                <entry key="answers" value-ref="singleA"/>
+            </map>
+        </property>
+    </bean>
+
+    <!--使用构造函数 注入简单值-->
+    <bean id="emp01" class="shop.yaojianfeng.springlearning.section2.entity.Employee" scope="prototype">
+        <!--隐含自动类型转换 默认对位注入 可以使用name 指定注入参数-->
+        <constructor-arg value="100" name="eid"/>
+        <constructor-arg value="Jeff" name="ename"/>
+    </bean>
+    <!--使用构造函数, 注入依赖对象-->
+    <bean id="emp02" class="shop.yaojianfeng.springlearning.section2.entity.Employee" scope="prototype">
+        <constructor-arg value="110" name="eid"/>
+        <constructor-arg value="Jack" name="ename"/>
+        <constructor-arg ref="address01" name="obj"/>
+    </bean>
+    <!--使用构造函数, 注入依赖集合-->
+    <bean id="emp03" class="shop.yaojianfeng.springlearning.section2.entity.Employee" scope="prototype">
+        <constructor-arg value="120" name="eid"/>
+        <constructor-arg value="Jame" name="ename"/>
+        <constructor-arg>
+            <list>
+                <value>hello</value>
+                <value>world</value>
+                <value>world</value>
+                <value>Jeff</value>
+                <ref bean="answer01"/>
+            </list>
+        </constructor-arg>
+    </bean>
+    <!--使用构造函数, 注入依赖 Map-->
+    <bean id="emp04" class="shop.yaojianfeng.springlearning.section2.entity.Employee" scope="prototype">
+        <constructor-arg value="120" name="eid"/>
+        <constructor-arg value="Jame" name="ename"/>
+        <constructor-arg>
+            <map>
+                <entry key="hello" value="world"/>
+                <entry key="Jeff" value-ref="student01"/>
+                <entry key="answer" value-ref="answer01"/>
+                <entry key-ref="student01" value-ref="answer01"/>
+            </map>
+        </constructor-arg>
+    </bean>
+
+    <!--注入继承bean 使用parent属性-->
+    <bean id="emp05" class="shop.yaojianfeng.springlearning.section2.entity.Employee" scope="prototype" parent="emp01">
+        <constructor-arg name="obj" ref="answer01"/>
+    </bean>
+    <!--容器感知类工具-->
+    <bean id="appUtil" class="shop.yaojianfeng.springlearning.section2.util.AppUtil"/>
+
+
+    <!--使用工厂方法进行DI-->
+    <bean id="singleA" class="shop.yaojianfeng.springlearning.section2.entity.SingletonA" factory-method="getInstance"/>
+    <bean id="printable" class="shop.yaojianfeng.springlearning.section2.util.PrintableFactory"
+          factory-method="getPrintable"/>
+    <bean id="printFactory" class="shop.yaojianfeng.springlearning.section2.util.PrintableFactory"/>
+    <bean id="printImpl" class="shop.yaojianfeng.springlearning.section2.util.PrintableFactory"
+          factory-method="showPrint"
+          factory-bean="printFactory"/>
+
+    <!--byName自动装配模式 属性的名称必须和配置的bean一致-->
+    <bean id="b" class="shop.yaojianfeng.springlearning.section2.entity.AutoB"/>
+<!--    <bean id="b1" class="shop.yaojianfeng.springlearning.section2.entity.AutoB"/>-->
+<!--    <bean id="byNameDemo" class="shop.yaojianfeng.springlearning.section2.entity.AutoA" autowire="byName"/>-->
+    <!--byType 如果配置多个同样类型的 自动注入将发生异常-->
+    <bean id="byTypeDemo" class="shop.yaojianfeng.springlearning.section2.entity.AutoA" autowire="byType"/>
+    <!--以参数化程度最高的构造函数来执行注入-->
+    <bean id="byConstructor" class="shop.yaojianfeng.springlearning.section2.entity.AutoA" autowire="constructor"/>
+
+    <!--基于注解 需要配置包扫描  需要xml头部添加命名空间: xmlns:context="http://www.springframework.org/schema/context ...-->
+    <context:component-scan base-package="shop.yaojianfeng.springlearning"/>
+    <!--测试Required-->
+    <bean id="studentImpl01" class="shop.yaojianfeng.springlearning.section2.service.Impl.StudentImpl">
+        <property name="age" value="15"/>
+    </bean>
+    <!--测试Autowire 自动选择注入方式 先找类型 再找名字 取不到唯一则报错 不使用构造函数也能注入 -->
+    <!--<context:annotation-config/>--><!--如果存在component-scan 则此配置可不写-->
+    <bean id="textEditor" class="shop.yaojianfeng.springlearning.section2.entity.TextEditor"/>
+<!--    <bean id="checker01" class="shop.yaojianfeng.springlearning.section2.entity.SpellChecker"/>-->
+    <bean id="checker02" class="shop.yaojianfeng.springlearning.section2.entity.SpellChecker"/>
+    <bean id="checker03" class="shop.yaojianfeng.springlearning.section2.entity.SpellChecker"/>
+    <bean id="byPhone" class="shop.yaojianfeng.springlearning.section2.service.Impl.LearnByPhone"/>
+    <bean id="byComputer" class="shop.yaojianfeng.springlearning.section2.service.Impl.LearnByComputer"/>
+    <bean id="people01" class="shop.yaojianfeng.springlearning.section2.entity.People"/>
+
+
+
+</beans>
