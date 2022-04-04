@@ -28,4 +28,54 @@
     <mvc:resources mapping="/js/**" location="/js/" />
     <mvc:resources mapping="/font/**" location="/font/" />
     <mvc:resources mapping="/img/**" location="/img/" />
+
+    <!--配置处理器映射器
+       根据bean的名称进行URL匹配
+   -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+    <!--默认配置 即使不配置 默认也是应用的以下配置-->
+    <!-- <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+         <property name="mappings">
+             <props>
+                 <prop key="/hello">helloWorldController</prop>
+                 <prop key="/student">studentController</prop>
+             </props>
+         </property>
+     </bean>-->
+
+    <!--配置视图解析器 要求id值必须为viewResolver-->
+        <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+            <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+<!--            使用此可自动解析页面的前缀后缀-->
+            <property name="prefix" value="/page/"/>
+            <property name="suffix" value=".jsp"/>
+
+
+        </bean>
+    <!--更加便捷的子类实现-->
+    <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/page/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>-->
+    <!--配置Thymeleaf模板解析器-->
+    <!--    <bean id="templateResolver" class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+            <property name="prefix" value="/page/"/>
+            <property name="suffix" value=".html"/>
+            <property name="templateMode" value="HTML"/>
+        </bean>
+        &lt;!&ndash;配置Thymeleaf模板引擎&ndash;&gt;
+        <bean id="templateEngine" class="org.thymeleaf.spring5.SpringTemplateEngine">
+            <property name="templateResolver" ref="templateResolver"/>
+            <property name="enableSpringELCompiler" value="true"/>
+        </bean>
+        &lt;!&ndash;配合Thymeleaf视图解析器&ndash;&gt;
+        <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+            <property name="templateEngine" ref="templateEngine"/>
+            <property name="order" value="1"/>
+            <property name="characterEncoding" value="UTF-8"/>
+        </bean>-->
+
+
+
 </beans>
