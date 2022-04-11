@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thymeleaf 字面值演示文档</title>
+    <link rel="stylesheet" href="" th:href="@{/Jeff/css/common.css}">
+</head>
+<body>
+<h2>文字字面值</h2>
+<div>
+    <p th:text="'my name is Sam'"></p>
+    <p th:text="'1+2'"></p>
+    <p th:text="'Result:'+(1+2)"></p>
+</div>
+<h2>数字字面值</h2>
+<div>
+    <p th:text="22"></p>
+    <p th:text="33.5"></p>
+    <p th:text="11+22"></p>
+</div>
+<h2>布尔字面值</h2>
+<div>
+    <p th:text="false"></p>
+    <p th:text="1>2"></p>
+    <p th:text="${3>2}"></p>
+    <p th:if="${3>5}">
+        content here will be displayed if the result is true
+    </p>
+</div>
+<h2>null 字面值</h2>
+<div>
+    <p th:if="${student.sid}!=null">
+        the value of attribute student.sid is <span style="color: #ff0000" th:text="${student.sid}"></span>
+    </p>
+</div>
+
+<h2>字面标记</h2>
+<div>
+    <p th:text="Sam"></p>
+    <p th:text="Sam_lee"></p>
+    <p th:text="www.baidu.com"></p>
+    <p th:text="a-b_c.d"></p>
+    <p th:text="姚剑锋"></p>
+</div>
+
+</body>
+</html>

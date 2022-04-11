@@ -1,7 +1,7 @@
 package space.yl.spring.section4.dao;
 
 import org.springframework.stereotype.Component;
-import shop.yaojianfeng.springlearning.common.util.MysqlUtil;
+import space.yl.spring.common.util.MysqlUtil;
 
 import java.sql.SQLException;
 import java.sql.Statement;

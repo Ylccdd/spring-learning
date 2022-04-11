@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>JSP - Hello World</title>
+    <link rel="stylesheet" href="css/common.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Hello World!</h1>
+<h2 style="color: red">首页直接放行 没有经过解析器 无法应用模板</h2>
+<br/>
+<h2>使用超链接提交数据</h2>
+<!--加“/”表示绝对路径：默认“http://localhost:8080”+请求路径 不加则代表相对路径(相对于当前资源的路径)-->
+<a href="/student/add01?name=姚剑锋&englishName=jeff&address=河南财经政法大学&phoneNumber=18039670878">showParam</a>
+<a href="" th:href="@{student/add01(name=jeff)}" > 有href</a>
+<a  th:href="@{student/add01(name=jeff)}" > 没有href</a>
+<h2>使用表单提交</h2>
+<form action="student/add" method="post">
+    <label>中文名字:
+        <input name="name" type="text">
+    </label>
+    <br>
+    <label>英文名字:
+        <input name="englishName" type="text">
+    </label>
+    <br>
+    <label>手机号码:
+        <input name="phoneNumber" type="text">
+    </label>
+    <label>家庭住址:
+        <input name="address" type="text">
+    </label>
+    <br>
+
+    <label>出生日期:
+        <input name="birthday" type="date">
+    </label>
+    <input type="submit"  value="提交">
+</form>
+<h2>使用ajax提交</h2>
+<button onclick="requestHeader()">ajax请求头提交数据</button>
+<button onclick="requestBody()">ajax请求体提交数据使用注解</button>
+<button onclick="requestBody01()">ajax请求体提交数据不带注解</button>
+<button onclick="useResponse()">使用HttpServletResponse对象响应</button>
+<button onclick="useOurType()">使用SpringMVC能力进行异步响应</button>
+
+<hr/>
+<div>
+    <a href="thymeleaf/hello">thymeleaf演示页面</a>
+</div>
+<script>
+    function requestHeader() {
+
+        $.ajax(
+            {
+                url: "student/requestHead",
+                type: "post",
+                headers: {
+                    eye: 'black eyes',
+                    hair: "black hair"
+                },
+                success: function (res) {
+                    console.log(res)
+                }
+
+            }
+        )
+    }
+
+    function requestBody() {
+        let data = {};
+        data.name = "姚剑锋";
+        data.address = "河南郑州";
+        data.phoneNumber = "18039670878";
+        data.englishName = "Jeff";
+        $.ajax(
+            {
+                url: "student/requestBody",
+                type: "post",
+                contentType: "application/json",
+                data: JSON.stringify(data),
+                success: function (res) {
+                    console.log(res)
+                }
+            }
+        )
+    }
+    function requestBody01() {
+        let data = {};
+        data.name = "姚剑锋";
+        data.address = "河南郑州";
+        data.phoneNumber = "18039670878";
+        data.englishName = "Jefffff";
+        data.xxx = "18039670878";
+        $.ajax(
+            {
+                url: "student/requestBody01",
+                type: "post",
+                data: data,
+                success: function (res) {
+                    console.log(res)
+                }
+
+            }
+        )
+    }
+    function useResponse() {
+        let data = {};
+        data.name = "姚剑锋useResponse";
+        data.address = "河南郑州";
+        data.phoneNumber = "18039670878";
+        $.ajax(
+            {
+                url: "student/useResponse",
+                type: "post",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType:"json",
+                success: function (res) {
+                    console.log(res)
+                }
+
+            }
+        )
+    }
+    function useOurType() {
+        let data = {};
+        data.name = "姚剑锋";
+        data.address = "河南郑州";
+        data.phoneNumber = "18039670878";
+        $.ajax(
+            {
+                url: "student/useOurType",
+                type: "post",
+                data: data,
+                success: function (res) {
+                    console.log(res)
+                }
+
+            }
+        )
+    }
+</script>
+</body>
+</html>
