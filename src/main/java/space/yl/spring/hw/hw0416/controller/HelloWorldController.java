@@ -1,4 +1,4 @@
-package space.yl.spring.hw.hw0404.controller;
+package space.yl.spring.hw.hw0416.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
